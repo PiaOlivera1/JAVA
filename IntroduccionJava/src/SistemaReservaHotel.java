@@ -5,6 +5,9 @@ public class SistemaReservaHotel {
     public static void main(String[] args) {
         var entrada = new Scanner(System.in);
         double precioTotal;
+        final double PRECIO_VISTA_AL_MAR =190.50;
+        final double PRECIO_SIN_VISTA_MAR =150.50;
+
         System.out.println("**** Bienvenidos al Hotel ****\n Para realizar la reserva, complete los siguentes datos...: ");
 
         System.out.println("Ingrese el nombre del cliente: ");
@@ -18,11 +21,13 @@ public class SistemaReservaHotel {
 
         boolean vista_al_mar= respuesta.equals("si") || respuesta.equals("Si") || respuesta.equals("true") || respuesta.equals("True");
 
-        if (vista_al_mar){
-            precioTotal = 190.50 * dias_estadia;
+        if (vista_al_mar)
+        {
+            precioTotal = PRECIO_VISTA_AL_MAR * dias_estadia;
         }
-        else{
-            precioTotal = 150.50 * dias_estadia;
+        else
+        {
+            precioTotal = PRECIO_SIN_VISTA_MAR * dias_estadia;
         }
 
         System.out.printf("""
