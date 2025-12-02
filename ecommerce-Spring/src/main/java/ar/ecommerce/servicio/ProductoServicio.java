@@ -27,7 +27,7 @@ public class ProductoServicio implements IProductoServicio{
     }
 
     @Override
-    public void agregarProducto(Producto producto) {
+    public Producto agregarProducto(Producto producto) {
         productoRepositorio.save(producto);
     }
 
