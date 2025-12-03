@@ -1,62 +1,18 @@
-package ar.ecommerce.controller;
+package ar.ecommerce.servicio;
 
 import ar.ecommerce.modelo.Producto;
-import ar.ecommerce.servicio.ProductoServicio;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/products")
-public class ProductoController {
+public interface IProductoServicio {
 
-    @Autowired
-    private ProductoServicio productoServicio;
+    List<Producto> listarProductos();
 
-    // ------------------ CREATE ------------------
-    @PostMapping
-    public Producto createProduct(@RequestBody Producto producto) {
-        return productoServicio.agregarProducto(producto);
-    }
+    Producto buscarProductoPorId(Integer id);
 
-    // ------------------ READ ALL ------------------
-    @GetMapping
-    public List<Producto> listarProductos() {
-        return productoServicio.listarProductos();
-    }
+    Producto agregarProducto(Producto producto);
 
-    // ------------------ READ BY ID ------------------
-    @GetMapping("/{id}")
-    public Producto obtenerProducto(@PathVariable Integer id) {
-        return productoServicio.buscarProductoPorId(id);
-    }
+    Producto modificarProducto(Producto producto);
 
-    // ------------------ UPDATE ------------------
-    @PutMapping("/{id}")
-    public Producto actualizarProducto(@PathVariable Integer id, @RequestBody Producto producto) {
-        Producto productoExistente = productoServicio.buscarProductoPorId(id);
-
-        if (productoExistente == null) {
-            return null; // o lanzar una excepción si querés manejarlo mejor
-        }
-
-        // Actualizá los campos que quieras (ejemplo)
-        productoExistente.setNombre(producto.getNombre());
-        productoExistente.setPrecio(producto.getPrecio());
-        productoExistente.setStock(producto.getStock());
-
-        return productoServicio.modificarProducto(productoExistente);
-    }
-
-    // ------------------ DELETE ------------------
-    @DeleteMapping("/{id}")
-    public String eliminarProducto(@PathVariable Integer id) {
-        Producto producto = productoServicio.buscarProductoPorId(id);
-        if (producto == null) {
-            return "Producto no encontrado";
-        }
-        productoServicio.eliminarProducto(producto);
-        return "Producto eliminado correctamente";
-    }
+    void eliminarProducto(Producto producto);
 }

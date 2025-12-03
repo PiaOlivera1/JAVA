@@ -16,10 +16,12 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nombre;
     private double precio;
     private String descripcion;
     private String categoria;
+    private Integer stock;
 
 
 }
